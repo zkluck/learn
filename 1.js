@@ -8,16 +8,47 @@
         typeof global == 'object' && global.global == global && global ||
         this || {};
 
+    var ArrayProto = Array.prototype;
+    var push = ArrayProto.push;
+
+    // 核心函数
+    // `_` 其实是一个构造函数
+    // 支持无 new 调用的构造函数（思考 jQuery 的无 new 调用）
+    // 将传入的参数（实际要操作的数据）赋值给 this._wrapped 属性
+    // OOP 调用时，_ 相当于一个构造函数
+    // each 等方法都在该构造函数的原型链上
+    // _([1, 2, 3]).each(alert)
+    // _([1, 2, 3]) 相当于无 new 构造了一个新的对象
+    // 调用了该对象的 each 方法，该方法在该对象构造函数的原型链上
     var _ = function(obj) {
+        // 以下均针对 OOP 形式的调用
+        // 如果是非 OOP 形式的调用，不会进入该函数内部
+
+        // 如果 obj 已经是 `_` 函数的实例，则直接返回 obj
         if (obj instanceof _) return obj;
+
+        // 如果不是 `_` 函数的实例
+        // 则调用 new 运算符，返回实例化的对象
         if (!(this instanceof _)) return new _(obj);
+
+        // 将 obj 赋值给 this._wrapped 属性
         this._wrapped = obj;
     };
 
-    root._ = _;
+    // 将上面定义的 `_` 局部变量赋值给全局对象中的 `_` 属性
+    // 即客户端中 window._ = _
+    // 服务端(node)中 exports._ = _
+    // 同时在服务端向后兼容老的 require() API
+    // 这样暴露给全局后便可以在全局环境中使用 `_` 变量(方法)
+    if (typeof exports !== 'undefined') {
+        if (typeof module !== 'undefined' && module.exports) {
+            exports = module.exports = _;
+        }
+        exports._ = _;
+    } else {
+        root._ = _;
+    }
 
-    var ArrayProto = Array.prototype;
-    var push = ArrayProto.push;
 
     var optimizeCb = function(func, context, argCount) {
         // 如果没有指定 this 指向，则返回原函数
@@ -120,24 +151,42 @@
         };
     }
 
-    _.mixin = function(obj) {
-        _.each(_.functions(obj), function(name) {
-            var func = _[name] = obj[name];
-            _.prototype[name] = function() {
-                var args = [this._wrapped];
-                push.apply(args, arguments);
-                return func.apply(_, args);
-            };
-        });
-        return _;
-    };
-
-    
-
     _.re = function(string) {
         return string + 1;
     }
 
+    // 可向 underscore 函数库扩展自己的方法
+    // obj 参数必须是一个对象（JavaScript 中一切皆对象）
+    // 且自己的方法定义在 obj 的属性上
+    // 如 obj.myFunc = function() {...}
+    // 形如 {myFunc: function(){}}
+    // 之后便可使用如下: _.myFunc(..) 或者 OOP _(..).myFunc(..)
+    _.mixin = function(obj) {
+        // 遍历 obj 的 key，将方法挂载到 Underscore 上
+        // 其实是将方法浅拷贝到 _.prototype 上
+        _.each(_.functions(obj), function(name) {
+            // 直接把方法挂载到 _[name] 上
+            // 调用类似 _.myFunc([1, 2, 3], ..)
+            var func = _[name] = obj[name];
+
+            // 浅拷贝
+            // 将 name 方法挂载到 _ 对象的原型链上，使之能 OOP 调用
+            _.prototype[name] = function() {
+                // 第一个参数
+                var args = [this._wrapped];
+
+                // arguments 为 name 方法需要的其他参数
+                push.apply(args, arguments);
+                // 执行 func 方法
+                // 支持链式操作
+                return result(this, func.apply(_, args));
+            };
+        });
+    };
+
+    // 将前面定义的 underscore 方法添加给包装过的对象
+    // 即添加到 _.prototype 中
+    // 使 underscore 支持面向对象形式的调用
     _.mixin(_);
 
 })()

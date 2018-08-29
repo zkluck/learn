@@ -86,15 +86,19 @@
 
                 var args = [this._wrapped];
 
-                // console.log(args)
+                
                 // console.log(arguments)
 
                 push.apply(args, arguments);
 
+                //console.log(args)
+
+                //console.log(push.apply(args, arguments))
+
                 //console.log(arguments)
                 // console.log(_)
-                // console.log(args)
-                // console.log(func)
+           
+                //console.log(func)
                 return func.apply(_, args);
             };
         });
@@ -109,8 +113,8 @@
 
 
 
-_([1,2,3]).each(function(v,n){
+_([1,2,4,1]).each(function(v,n){
 
 });
-// console.log(_('1').log());
+// _('2,2').log();
 // console.log(_.log(1));

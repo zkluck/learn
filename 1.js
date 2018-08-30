@@ -13,7 +13,7 @@
 
 
     if (typeof exports != 'undefined' && !exports.nodeType) {
-    	//新版本
+        //新版本
         if (typeof module != 'undefined' && !module.nodeType && module.exports) {
             exports = module.exports = _;
         }
@@ -21,6 +21,8 @@
     } else {
         root._ = _;
     }
+
+    _.VERSION = '0.1';
 
 
     //console.log(_.hasOwnProperty('log')) //判断一个属性是否来自对象本身
@@ -50,6 +52,17 @@
         return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
     };
 
+    var chainResult = function(instance, obj) {
+        return instance._chain ? _(obj).chain() : obj;
+    };
+
+    //链式调用
+    _.chain = function(obj) {
+        var instance = _(obj);
+        instance._chain = true;
+        return instance;
+    }
+
     //循环
     _.each = function(obj, callback) {
         var length, i = 0;
@@ -78,43 +91,29 @@
     _.mixin = function(obj) {
         _.each(_.functions(obj), function(name) {
             var func = _[name] = obj[name];
-
-            // console.log(name)
-
             _.prototype[name] = function() {
-
-
                 var args = [this._wrapped];
-
-                
-                // console.log(arguments)
-
                 push.apply(args, arguments);
-
-                //console.log(args)
-
-                //console.log(push.apply(args, arguments))
-
-                //console.log(arguments)
-                // console.log(_)
-           
-                //console.log(func)
-                return func.apply(_, args);
+                return chainResult(this, func.apply(_, args));
             };
         });
-
 
         return _;
     };
 
     _.mixin(_);
 
-})()
+    _.prototype.value = function() {
+        return this._wrapped;
+    };
+
+})();
 
 
 
-_([1,2,4,1]).each(function(v,n){
+var res = _.chain(2).log().log().log().value();
 
-});
+console.log(res)
+
 // _('2,2').log();
 // console.log(_.log(1));

@@ -1,4 +1,4 @@
-# learn-underscore
+# underscore
 跟着这个[BLOG](https://github.com/mqyqingfeng/Blog)
 
 ##不清楚的地方：  

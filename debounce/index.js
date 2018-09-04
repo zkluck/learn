@@ -11,6 +11,7 @@ function debounce(func, wait){
 		clearTimeout(timeout);
 		timeout = setTimeout(func, wait);
 	}
+
 }
 
 container.onmousemove = debounce(getUserAction, 1000);

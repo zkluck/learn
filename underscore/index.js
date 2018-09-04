@@ -66,7 +66,7 @@
         if (value == null) return _.identity;
         if (_.isFunction(value)) return optimizeCb(value, context, argCount);
         if (_.isObject(value) && !_.isArray(value)) return _.matcher(value);
-        return _.property(value);
+        // return _.property(value); todo
     };
 
     var optimizeCb = function(func, context) {

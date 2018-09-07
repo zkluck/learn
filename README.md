@@ -13,3 +13,6 @@ reutn function(x){ return x } 柯里函数 看了 [这篇](https://www.zhangxinx
 
 ##不清楚的地方：
 return function(){} 看了 [这篇](https://segmentfault.com/q/1010000012403759) 
+
+##去重
+{} == {} //false 看了 [这篇](https://blog.csdn.net/hb_zhouyj/article/details/78343021) 

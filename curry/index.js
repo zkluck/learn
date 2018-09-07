@@ -14,4 +14,4 @@ function add(a, b){
 // addCurry();
 
 var addCurry = curry(add, 1);
-console.log(addCurry(2))
+console.log(addCurry(2));

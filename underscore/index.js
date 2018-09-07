@@ -8,7 +8,9 @@
         this._wrapped = obj;
     }
 
-    var ArrayProto = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype;
+    var ArrayProto = Array.prototype,
+        ObjProto = Object.prototype,
+        FuncProto = Function.prototype;
 
     var push = ArrayProto.push,
         hasOwnProperty = ObjProto.hasOwnProperty; //判断一个属性是否来自对象本身
@@ -66,7 +68,7 @@
         if (value == null) return _.identity;
         if (_.isFunction(value)) return optimizeCb(value, context, argCount);
         if (_.isObject(value) && !_.isArray(value)) return _.matcher(value);
-        // return _.property(value); todo
+        return _.property(value);
     };
 
     var optimizeCb = function(func, context) {
@@ -120,6 +122,32 @@
             // 返回已经继承后面对象参数属性的第一个参数对象
             return obj;
         };
+    };
+
+    _.property = function(path) {
+        // 如果不是数组
+        if (!_.isArray(path)) {
+            return shallowProperty(path);
+        }
+        return function(obj) {
+            return deepGet(obj, path);
+        };
+    };
+
+    var shallowProperty = function(key) {
+        return function(obj) {
+            return obj == null ? void 0 : obj[key];
+        };
+    };
+
+    // 根据路径取出深层次的值
+    var deepGet = function(obj, path) {
+        var length = path.length;
+        for (var i = 0; i < length; i++) {
+            if (obj == null) return void 0;
+            obj = obj[path[i]];
+        }
+        return length ? obj : void 0;
     };
 
     // 返回一个对象的 keys 数组
@@ -289,4 +317,4 @@
 })();
 
 
-console.log(_.map([{aa:11,bb:22}], 'bb'));
+console.log(_.map([{ aa: 11, bb: 22 }], 'bb'));

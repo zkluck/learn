@@ -16,3 +16,12 @@ return function(){} 看了 [这篇](https://segmentfault.com/q/1010000012403759)
 
 ##去重
 {} == {} //false 看了 [这篇](https://blog.csdn.net/hb_zhouyj/article/details/78343021) 
+
+## JavaScript 执行机制
+[URL](https://juejin.im/post/59e85eebf265da430d571f89)
+
+##Flexible H5页面终端适配
+[URL](https://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html)
+
+##EventEmitter
+[URL](https://www.cnblogs.com/leaf930814/p/9014200.html)

@@ -6,10 +6,15 @@
   "scripts": {
     "start": "yarn run dev",
     "dev": "webpack-dev-server",
-    "build": "webpack"
+    "build:client": "webpack --config config/webpack.client.config.js",
+    "build:server": "webpack --config config/webpack.server.config.js"
   },
   "dependencies": {
-    "vue": "^2.5.17"
+    "koa": "^2.5.3",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "vue": "^2.5.17",
+    "vue-server-renderer": "^2.5.17"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -29,6 +34,7 @@
     "vue-template-compiler": "^2.5.17",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.9"
+    "webpack-dev-server": "^3.1.9",
+    "webpack-merge": "^4.1.4"
   }
 }

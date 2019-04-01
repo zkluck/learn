@@ -1,0 +1,35 @@
+<template>
+  <div id="app">
+    <!-- <router-link to="/bar">Goto Bar</router-link> 
+    <router-link to="/foo">Goto Foo</router-link> 
+    <router-view></router-view> -->
+    <Bar></Bar>
+  </div>
+</template>
+
+<script>
+import Bar from '../../components/Bar';
+
+export default {
+  name: 'app',
+  components: {
+    Bar
+  }
+  // beforeCreate() {
+  //   console.log('App.vue beforeCreate');
+  // },
+
+  // created() {
+  //   console.log('App.vue created');
+  // },
+
+  // beforeMount() {
+  //   console.log('App.vue beforeMount');
+  // },
+
+  // mounted() {
+  //   console.log('App.vue mounted');
+  // }
+}
+</script>
+

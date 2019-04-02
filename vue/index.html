@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <!--  vue-app是根容器 -->
+    <div id="vue-app">
+        <h1>{{ name }}</h1>
+        <p>{{ job }}</p>
+        <p>{{ greet('zk') }}</p>
+        <a v-bind:href="website">web开发</a>
+        <input type="text" v-bind:value="name">
+        <p v-html="websiteTag"></p>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

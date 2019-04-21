@@ -5,11 +5,24 @@ new Vue({
         name: 'zk',
         job: 'web',
         website:'http://www.baidu.com',
-        websiteTag: '<a href="http://www.baidu.com">news</a>'
+        websiteTag: '<a href="http://www.baidu.com">news</a>',
+        age: 30,
+        x:0,
+        y:0
     },
     methods:{
         greet: function(time){
             return 'good job ' + time + ' ' + this.job;
+        },
+        add: function(inc){
+            this.age += inc;
+        },
+        subtract: function(dec){
+            this.age -= dec;
+        },
+        updateXY: function(event){
+            this.x = event.offsetX;
+            this.y = event.offsetY;
         }
     }
 })

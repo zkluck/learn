@@ -1,0 +1,8 @@
+{
+  "name": "learn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:zkluck/learn-underscore.git",
+  "author": "zkluck <233393062@qq.com>",
+  "license": "MIT"
+}

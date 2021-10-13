@@ -11,10 +11,10 @@ new Vue({
         y:0
     },
     methods:{
-        greet: function(time){
+        greet(time){
             return 'good job ' + time + ' ' + this.job;
         },
-        add: function(inc){
+        add(inc){
             this.age += inc;
         },
         subtract: function(dec){

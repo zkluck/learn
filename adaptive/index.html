@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    /*
+        设计稿750px
+        100/750
+    */
+    html { 
+        font-size: 13.3333333vw;
+    }
+    /* 
+        设计稿1920px
+        100/1920
+    */
+    @media (min-width: 751px) { 
+        html {
+            font-size: 5.2083333vw;
+        }
+    }
+    @media (min-width: 1920px) {
+        html {
+            font-size: 100px;
+        }
+    }
+    div {
+        width: 1rem;
+        height: 1rem;
+        background-color: antiquewhite;
+    }
+</style>
+<body>
+    <div></div>
+</body>
+</html>

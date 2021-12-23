@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .flex-container{
+  width:100vw;
+  height:100vh;
+  padding-top:300px;
+}
+
+.flex-container h5{
+  text-align:center;
+  font-size:20px;
+  margin-bottom:20px;
+}
+
+.flex-container ul{
+  height:100%;
+  display:flex;
+  justify-content:center;
+}
+
+.flex-container ul li{
+  width:100px;
+  height:100px;
+  line-height:100px;
+  text-align:center;
+  border-radius: 100%;
+  background:yellow;
+  margin:20px;
+}
+
+.flex-container ul li:nth-child(1){
+  order:1;
+  position:relative;
+  top:-20px;
+}
+
+.flex-container ul li:nth-child(2){
+  order:0;
+}
+
+.flex-container ul li:nth-child(3){
+  order:2;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="flex-container">
+        <h5>排行榜</h5>
+        <ul>
+          <li>第一名</li>
+          <li>第二名</li>
+          <li>第三名</li>
+        </ul>
+      </div>
+      
+  
+</body>
+</html>

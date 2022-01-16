@@ -16,6 +16,7 @@ Child.prototype = Object.create(Parent.prototype)
 // Object.create 简单实现
 // function F() {}
 // F.prototype = Parent.prototype
+// F.prototype = new Parent()  都会继承say方法，new方法还继承了属性，但是不能传参
 // Child.prototype = new F()
 
 Child.prototype.constructor = Child // 修正constructor指向

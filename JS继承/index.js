@@ -13,6 +13,11 @@ function Child(name,like) {
 //核心 通过创建中间对象，子类原型和父类原型，就会隔离开。不是同一个，有效避免了优化方式1的缺点
 Child.prototype = Object.create(Parent.prototype)
 
+// Object.create 简单实现
+// function F() {}
+// F.prototype = Parent.prototype
+// Child.prototype = new F()
+
 Child.prototype.constructor = Child // 修正constructor指向
 
 let boy1 = new Child('小红','apple');

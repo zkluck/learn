@@ -69,3 +69,61 @@ const myHardWare = myPhone.createHardWare();
 
 myOS.controHadrWare();
 myHardWare.operateByOrder();
+
+
+// 单例模式
+
+// 静态方法版
+class Storage {
+    static getInstance() {
+        if(!Storage.instance) {
+            Storage.instance = new Storage();
+        }
+        return Storage.instance;
+    }
+    getItem (key){
+        return localStorage.getItem(key);
+    }
+    setItem (key, value){
+        return localStorage.setItem(key, value);
+    }
+}
+
+
+// 闭包版
+function StorageBase(){}
+StorageBase.prototype.getItem = function(key){
+    return localStorage.getItem(key);
+}
+
+StorageBase.prototype.setItem = function(key, value){
+    return localStorage.setItem(key, value);
+}
+
+const Storage = (function(){
+    let instance = null;
+    return function(){
+        if(!instance) {
+            instance = new StorageBase();
+        }
+        return instance;
+    }
+})()
+
+// Modal弹框
+
+const Modal =(function(){
+    let modal = null;
+    if(!modal) {
+        modla = document.createElement('div');
+        modal.innerHTML = '我是一个全局唯一的Modal';
+        modal.id = 'modal';
+        modal.style.display = 'none';
+        document.body.appendChild(modal);
+    }
+})()
+
+document.getElementById('btn').onclick = function(){
+    const modal = new Modal()
+    modal.style.display = 'block'
+}

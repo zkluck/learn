@@ -8,11 +8,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zkluck/learn-underscore.git"
-  },
-  "author": "",
+  "repository": "git+https://github.com/zkluck/learn-underscore.git",
+  "author": "zkluck <233393062@qq.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/zkluck/learn-underscore/issues"
